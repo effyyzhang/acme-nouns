@@ -3,7 +3,7 @@ const path = require('path');
 const db = require('./db');
 
 const app = express();
-
+app.use('/api', require('./api'));
 app.get('/', (req, res, next) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
@@ -13,5 +13,5 @@ db.syncAndSeed()
   .then(() => {
     app.listen(port, () => {
       console.log(`listening on port ${port}`);
-    });    
+    });
   });
