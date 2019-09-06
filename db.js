@@ -14,7 +14,9 @@ const Person = conn.define('person', {
     type: STRING,
     allowNull: false,
     unique: true,
-    // notEmpty: true
+    validate: {
+      notEmpty: true
+    }
   }
 });
 
@@ -27,7 +29,10 @@ const Thing = conn.define('thing', {
   name: {
     type: STRING,
     allowNull: false,
-    unique: true
+    unique: true,
+    validate: {
+      notEmpty: true
+    }
   }
 });
 
@@ -40,7 +45,10 @@ const Place = conn.define('place', {
   name: {
     type: STRING,
     allowNull: false,
-    unique: true
+    unique: true,
+    validate: {
+      notEmpty: true
+    }
   }
 });
 
@@ -75,4 +83,11 @@ const syncAndSeed = async () => {
   await Promise.all(things.map( thing => Thing.create(thing)));
 };
 
-syncAndSeed();
+module.exports = {
+  syncAndSeed,
+  model: {
+    Place,
+    Person,
+    Thing
+  }
+};
